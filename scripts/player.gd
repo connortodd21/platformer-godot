@@ -49,3 +49,4 @@ func handle_snail_collision() -> void:
 	hit_sound.play()
 	player_is_alive = false
 	animations.animation = "hit"
+	

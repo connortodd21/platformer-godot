@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://bjh5pyapcx7g"]
+[gd_scene load_steps=12 format=4 uid="uid://bjh5pyapcx7g"]
 
 [ext_resource type="Texture2D" uid="uid://cyith0l7vpfuc" path="res://assets/images/Background/Green.png" id="1_dd0lh"]
 [ext_resource type="Texture2D" uid="uid://cshe66kbh8bhe" path="res://assets/images/Tilemap/Terrain (16x16).png" id="1_x6ivy"]
 [ext_resource type="PackedScene" uid="uid://pbmoqjvodepq" path="res://scenes/player.tscn" id="2_4tcl0"]
 [ext_resource type="PackedScene" uid="uid://br3vpue4saaom" path="res://scenes/enemy_snail.tscn" id="4_bfxgj"]
 [ext_resource type="Script" uid="uid://byh07hp61qgo6" path="res://scripts/snail_wall_collision.gd" id="5_dywbp"]
+[ext_resource type="PackedScene" uid="uid://kbge01jgqqfn" path="res://scenes/apple.tscn" id="6_1seuy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ypoqj"]
 texture = ExtResource("1_x6ivy")
@@ -194,13 +195,13 @@ tile_map_data = PackedByteArray("AAACAA4AAAAHAAkAAAADAA4AAAAHAAkAAAAEAA4AAAAHAAk
 tile_set = SubResource("TileSet_w3gk0")
 
 [node name="Player" parent="." instance=ExtResource("2_4tcl0")]
-position = Vector2(45.33333, 173.33333)
+position = Vector2(45.33333, 173.33334)
 scale = Vector2(1, 1)
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="EnemySnail" parent="Enemies" instance=ExtResource("4_bfxgj")]
-position = Vector2(389.33334, 200)
+position = Vector2(373, 199.66666)
 collision_layer = 3
 collision_mask = 3
 
@@ -236,6 +237,20 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SnailWallCollision/Level1RightWall"]
 position = Vector2(245.33333, 213.33334)
 shape = SubResource("RectangleShape2D_1seuy")
+
+[node name="Collectibles" type="Node2D" parent="."]
+
+[node name="Apple" parent="Collectibles" instance=ExtResource("6_1seuy")]
+position = Vector2(136, 69.33333)
+scale = Vector2(0.5, 0.5)
+
+[node name="Apple2" parent="Collectibles" instance=ExtResource("6_1seuy")]
+position = Vector2(328, 133.33334)
+scale = Vector2(0.5, 0.5)
+
+[node name="Apple3" parent="Collectibles" instance=ExtResource("6_1seuy")]
+position = Vector2(421.33334, 213.33333)
+scale = Vector2(0.5, 0.5)
 
 [connection signal="area_entered" from="SnailWallCollision/Level1LeftWall" to="SnailWallCollision" method="_on_level_1_left_wall_area_entered"]
 [connection signal="area_entered" from="SnailWallCollision/Level1CenterPillar" to="SnailWallCollision" method="_on_level_1_center_pillar_area_entered"]
