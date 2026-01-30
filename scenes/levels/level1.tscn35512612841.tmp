@@ -194,7 +194,7 @@ tile_map_data = PackedByteArray("AAACAA4AAAAHAAkAAAADAA4AAAAHAAkAAAAEAA4AAAAHAAk
 tile_set = SubResource("TileSet_w3gk0")
 
 [node name="Player" parent="." instance=ExtResource("2_4tcl0")]
-position = Vector2(45.33333, 173.33333)
+position = Vector2(129.33333, 208)
 scale = Vector2(1, 1)
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -220,23 +220,23 @@ collision_mask = 2
 position = Vector2(54.16668, 213.33334)
 shape = SubResource("RectangleShape2D_bfxgj")
 
-[node name="Level1CenterPillar" type="Area2D" parent="SnailWallCollision"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SnailWallCollision/Level1CenterPillar"]
-position = Vector2(256, 213.16667)
-shape = SubResource("RectangleShape2D_dywbp")
-
 [node name="Level1RightWall" type="Area2D" parent="SnailWallCollision"]
-position = Vector2(194.66667, 0)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SnailWallCollision/Level1RightWall"]
+position = Vector2(256, 213.16667)
+shape = SubResource("RectangleShape2D_dywbp")
+
+[node name="Level1CenterPillar" type="Area2D" parent="SnailWallCollision"]
+position = Vector2(194.66667, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SnailWallCollision/Level1CenterPillar"]
 position = Vector2(245.33333, 213.33334)
 shape = SubResource("RectangleShape2D_1seuy")
 
 [connection signal="area_entered" from="SnailWallCollision/Level1LeftWall" to="SnailWallCollision" method="_on_level_1_left_wall_area_entered"]
-[connection signal="area_entered" from="SnailWallCollision/Level1CenterPillar" to="SnailWallCollision" method="_on_level_1_center_pillar_area_entered"]
 [connection signal="area_entered" from="SnailWallCollision/Level1RightWall" to="SnailWallCollision" method="_on_level_1_right_wall_area_entered"]
+[connection signal="area_entered" from="SnailWallCollision/Level1CenterPillar" to="SnailWallCollision" method="_on_level_1_center_pillar_area_entered"]

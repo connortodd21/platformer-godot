@@ -2,12 +2,16 @@ extends CharacterBody2D
 
 @onready var animations := $Animations
 @onready var jump_sound = $JumpSound
+@onready var hit_sound = $HitSound
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -850.0
+var player_is_alive = true
 
 
 func _physics_process(delta: float) -> void:
+	if !player_is_alive:
+		return
 	# Add animation
 	if velocity.x > 1 or velocity.x < -1:
 		animations.animation = "run"
@@ -39,3 +43,9 @@ func _physics_process(delta: float) -> void:
 		animations.flip_h = false
 	elif direction == -1:
 		animations.flip_h = true
+
+
+func handle_snail_collision() -> void:
+	hit_sound.play()
+	player_is_alive = false
+	animations.animation = "hit"

@@ -239,11 +239,11 @@ size = Vector2(34, 14)
 [node name="EnemySnail" type="Area2D"]
 script = ExtResource("1_dkudf")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Animations" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(19, 12)
 sprite_frames = SubResource("SpriteFrames_j37aw")
-animation = &"walk"
+animation = &"hit"
 autoplay = "idle"
 
 [node name="SnailBodyCollision" type="CollisionShape2D" parent="."]
@@ -254,4 +254,7 @@ shape = SubResource("RectangleShape2D_nfn8v")
 position = Vector2(26, 13)
 polygon = PackedVector2Array(-11, -3, 10, -3, 10, -7, 4, -11, -5, -11, -11, -7)
 
+[node name="SnailHitTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="SnailHitTimer" to="." method="_on_snail_hit_timer_timeout"]
