@@ -1,5 +1,6 @@
-[gd_scene load_steps=36 format=3 uid="uid://br3vpue4saaom"]
+[gd_scene load_steps=37 format=3 uid="uid://br3vpue4saaom"]
 
+[ext_resource type="Script" uid="uid://kbjhvtn0wuk4" path="res://scripts/enemy_snail.gd" id="1_dkudf"]
 [ext_resource type="Texture2D" uid="uid://cfiumcwnnawmm" path="res://assets/images/Snail/Hit (38x24).png" id="1_nfn8v"]
 [ext_resource type="Texture2D" uid="uid://cxuviu61p4h5q" path="res://assets/images/Snail/Idle (38x24).png" id="2_dkudf"]
 [ext_resource type="Texture2D" uid="uid://cex1nt5jvcipo" path="res://assets/images/Snail/Walk (38x24).png" id="3_xdjgi"]
@@ -236,6 +237,7 @@ animations = [{
 size = Vector2(34, 14)
 
 [node name="EnemySnail" type="Area2D"]
+script = ExtResource("1_dkudf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -251,3 +253,5 @@ shape = SubResource("RectangleShape2D_nfn8v")
 [node name="SnailShellCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2(26, 13)
 polygon = PackedVector2Array(-11, -3, 10, -3, 10, -7, 4, -11, -5, -11, -11, -7)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

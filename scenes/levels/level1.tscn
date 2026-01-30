@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://bjh5pyapcx7g"]
+[gd_scene load_steps=11 format=4 uid="uid://bjh5pyapcx7g"]
 
 [ext_resource type="Texture2D" uid="uid://cyith0l7vpfuc" path="res://assets/images/Background/Green.png" id="1_dd0lh"]
 [ext_resource type="Texture2D" uid="uid://cshe66kbh8bhe" path="res://assets/images/Tilemap/Terrain (16x16).png" id="1_x6ivy"]
 [ext_resource type="PackedScene" uid="uid://pbmoqjvodepq" path="res://scenes/player.tscn" id="2_4tcl0"]
 [ext_resource type="PackedScene" uid="uid://br3vpue4saaom" path="res://scenes/enemy_snail.tscn" id="4_bfxgj"]
+[ext_resource type="Script" uid="uid://byh07hp61qgo6" path="res://scripts/snail_wall_collision.gd" id="5_dywbp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ypoqj"]
 texture = ExtResource("1_x6ivy")
@@ -166,6 +167,15 @@ texture = ExtResource("1_x6ivy")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ypoqj")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfxgj"]
+size = Vector2(19.666643, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dywbp"]
+size = Vector2(31.999992, 21.666656)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1seuy"]
+size = Vector2(16.000015, 20)
+
 [node name="LevelRoot" type="Node2D"]
 scale = Vector2(3, 3)
 
@@ -177,6 +187,7 @@ texture = ExtResource("1_dd0lh")
 stretch_mode = 1
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+visibility_layer = 3
 texture_filter = 1
 tile_map_data = PackedByteArray("AAACAA4AAAAHAAkAAAADAA4AAAAHAAkAAAAEAA4AAAAHAAkAAAAFAA4AAAAHAAkAAAAGAA4AAAAHAAkAAAAHAA4AAAAHAAkAAAAIAA4AAAAHAAkAAAAJAA4AAAAHAAkAAAAKAA4AAAAHAAkAAAALAA4AAAAHAAkAAAAMAA4AAAAHAAkAAAANAA4AAAAHAAkAAAAOAA4AAAAHAAkAAAAPAA4AAAAHAAkAAAAQAA4AAAAHAAkAAAARAA4AAAAHAAkAAAASAA4AAAAHAAkAAAATAA4AAAAHAAkAAAAUAA4AAAAHAAkAAAAVAA4AAAAHAAkAAAAWAA4AAAAHAAkAAAAXAA4AAAAHAAkAAAAYAA4AAAAHAAkAAAAZAA4AAAAHAAkAAAAaAA4AAAAHAAkAAAAbAA4AAAAHAAkAAAAbAA0AAAAHAAkAAAAbAAwAAAAHAAkAAAAbAAsAAAAHAAkAAAAbAAoAAAAHAAkAAAAbAAkAAAAHAAkAAAAbAAgAAAAHAAkAAAAbAAcAAAAHAAkAAAAbAAYAAAAHAAkAAAAbAAEAAAAHAAkAAAAbAAIAAAAHAAkAAAAaAAYAAAAHAAkAAAAZAAYAAAAHAAkAAAAYAAYAAAAHAAkAAAAXAAYAAAAHAAkAAAAWAAYAAAAHAAkAAAAUAAYAAAAHAAkAAAAVAAYAAAAHAAkAAAAUAAUAAAAHAAgAAAAVAAUAAAAHAAgAAAAWAAUAAAAHAAgAAAAXAAUAAAAHAAgAAAAYAAUAAAAHAAgAAAAZAAUAAAAHAAgAAAAaAAUAAAAHAAgAAAAbAAUAAAAHAAgAAAARAAcAAAAHAAgAAAAQAAcAAAAHAAgAAAAPAAcAAAAHAAgAAAAMAAkAAAAHAAgAAAALAAkAAAAHAAgAAAAPAAsAAAAHAAgAAAAQAAsAAAAHAAgAAAAPAAwAAAAHAAkAAAAPAA0AAAAHAAkAAAAQAAwAAAAHAAkAAAAQAA0AAAAHAAkAAAACAA0AAAAHAAkAAAADAA0AAAAHAAkAAAAAAA0AAAAHAAkAAAABAA0AAAAHAAkAAAAAAA4AAAAHAAkAAAABAA4AAAAHAAkAAAACAAwAAAAHAAgAAAADAAwAAAAHAAgAAAAGAAsAAAAMAAkAAAAJAAsAAAAMAAkAAAAUAAkAAAAMAAkAAAAEAAgAAAAMAAkAAAAIAAUAAAAMAAkAAAANAAMAAAAMAAkAAAAZAAAAAAAHAAkAAAAYAAAAAAAHAAkAAAAXAAAAAAAHAAkAAAAWAAAAAAAHAAkAAAAVAAAAAAAHAAkAAAAUAAAAAAAHAAkAAAATAAAAAAAHAAkAAAASAAAAAAAHAAkAAAARAAAAAAAHAAkAAAAQAAAAAAAHAAkAAAAPAAAAAAAHAAkAAAAOAAAAAAAHAAkAAAANAAAAAAAHAAkAAAAMAAAAAAAHAAkAAAALAAAAAAAHAAkAAAAKAAAAAAAHAAkAAAAJAAAAAAAHAAkAAAAIAAAAAAAHAAkAAAAHAAAAAAAHAAkAAAAGAAAAAAAHAAkAAAAFAAAAAAAHAAkAAAAEAAAAAAAHAAkAAAADAAAAAAAHAAkAAAACAAAAAAAHAAkAAAAAAAAAAAAHAAkAAAABAAAAAAAHAAkAAAAaAAAAAAAHAAkAAAAbAAAAAAAHAAkAAAABAAwAAAAHAAgAAAAAAAwAAAAHAAkAAAAAAAsAAAAHAAkAAAAAAAoAAAAHAAkAAAAAAAkAAAAHAAkAAAAAAAgAAAAHAAkAAAAAAAcAAAAHAAkAAAAAAAYAAAAHAAkAAAAAAAUAAAAHAAkAAAAAAAQAAAAHAAkAAAAAAAMAAAAHAAkAAAAAAAIAAAAHAAkAAAAAAAEAAAAHAAkAAAA=")
 tile_set = SubResource("TileSet_w3gk0")
@@ -189,6 +200,42 @@ scale = Vector2(1, 1)
 
 [node name="EnemySnail" parent="Enemies" instance=ExtResource("4_bfxgj")]
 position = Vector2(389.33334, 200)
+collision_layer = 3
+collision_mask = 3
 
 [node name="EnemySnail2" parent="Enemies" instance=ExtResource("4_bfxgj")]
 position = Vector2(200, 200)
+collision_layer = 3
+collision_mask = 3
+
+[node name="SnailWallCollision" type="Node2D" parent="."]
+script = ExtResource("5_dywbp")
+
+[node name="Level1LeftWall" type="Area2D" parent="SnailWallCollision"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SnailWallCollision/Level1LeftWall"]
+position = Vector2(54.16668, 213.33334)
+shape = SubResource("RectangleShape2D_bfxgj")
+
+[node name="Level1RightWall" type="Area2D" parent="SnailWallCollision"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SnailWallCollision/Level1RightWall"]
+position = Vector2(256, 213.16667)
+shape = SubResource("RectangleShape2D_dywbp")
+
+[node name="Level1CenterPillar" type="Area2D" parent="SnailWallCollision"]
+position = Vector2(194.66667, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SnailWallCollision/Level1CenterPillar"]
+position = Vector2(245.33333, 213.33334)
+shape = SubResource("RectangleShape2D_1seuy")
+
+[connection signal="area_entered" from="SnailWallCollision/Level1LeftWall" to="SnailWallCollision" method="_on_level_1_left_wall_area_entered"]
+[connection signal="area_entered" from="SnailWallCollision/Level1RightWall" to="SnailWallCollision" method="_on_level_1_right_wall_area_entered"]
+[connection signal="area_entered" from="SnailWallCollision/Level1CenterPillar" to="SnailWallCollision" method="_on_level_1_center_pillar_area_entered"]
