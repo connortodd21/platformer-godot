@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://bjh5pyapcx7g"]
+[gd_scene load_steps=7 format=4 uid="uid://bjh5pyapcx7g"]
 
 [ext_resource type="Texture2D" uid="uid://cyith0l7vpfuc" path="res://assets/images/Background/Green.png" id="1_dd0lh"]
 [ext_resource type="Texture2D" uid="uid://cshe66kbh8bhe" path="res://assets/images/Tilemap/Terrain (16x16).png" id="1_x6ivy"]
 [ext_resource type="PackedScene" uid="uid://pbmoqjvodepq" path="res://scenes/player.tscn" id="2_4tcl0"]
+[ext_resource type="PackedScene" uid="uid://br3vpue4saaom" path="res://scenes/enemy_snail.tscn" id="4_bfxgj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ypoqj"]
 texture = ExtResource("1_x6ivy")
@@ -183,3 +184,11 @@ tile_set = SubResource("TileSet_w3gk0")
 [node name="Player" parent="." instance=ExtResource("2_4tcl0")]
 position = Vector2(129.33333, 208)
 scale = Vector2(1, 1)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="EnemySnail" parent="Enemies" instance=ExtResource("4_bfxgj")]
+position = Vector2(389.33334, 200)
+
+[node name="EnemySnail2" parent="Enemies" instance=ExtResource("4_bfxgj")]
+position = Vector2(200, 200)
