@@ -12,11 +12,13 @@ var level : int = 1
 func _ready() -> void:
 	fade.modulate.a = 1.0
 	current_level_root = get_node("LevelRoot")
-	await load_level(level)
+	await load_level(level, false)
 
 
-func load_level(level_to_load: int) -> void:
+func load_level(level_to_load: int, should_reset_score: bool) -> void:
 	await _fade(1.0)
+	if should_reset_score:
+		update_score(0)
 	# remove old level
 	if current_level_root:
 		current_level_root.queue_free()
@@ -53,18 +55,20 @@ func _on_exit(body: Node2D) -> void:
 	if body.name == "Player":
 		level += 1
 		body.can_move = false
-		await load_level(level)
+		await load_level(level, false)
 	
 	
 func _on_collectible_collected() -> void:
-	score += 1
+	update_score(score + 1)
+
+func update_score(new_score: int) -> void:
+	score = new_score
 	score_label.text = "SCORE: %d" % score
 
-
 func _on_player_hit(body: Node2D) -> void:
+	level = 1
 	body.handle_snail_collision()
-	score = 0
-	await load_level(level)
+	await load_level(level, true)
 	
 func _fade(to_alpha: float) -> void:
 	var tween = create_tween()
